@@ -7,6 +7,22 @@
 
 <body>
   <p>🐣 Tiny App</p>
+  <% if(username) { %>
+    <%= username %> 
+      <form style="display: inline"; method="POST" action="/logout">
+        <button type="submit">
+          <span>Sign out</span>
+        </button>
+      </form>
+  <% } else { %>  
+  <form method="POST" action="/login">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text">
+    <button type="submit">
+      <span>Sign in</span>
+    </button>
+  </form>
+  <% } %>
 </body>
 
 </html>

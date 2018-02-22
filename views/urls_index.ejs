@@ -7,6 +7,7 @@
 
 <body>
   <%- include('partials/_header');%>
+  
   <% for (shortURL in urls) { %>
     <div><a href="/u/<%=shortURL%>"><%= shortURL %></a> → <%= urls[shortURL] %> &nbsp
       <form style="display: inline;" method="GET"><a href="/urls/<%=shortURL%>">Edit</a></form> &nbsp
