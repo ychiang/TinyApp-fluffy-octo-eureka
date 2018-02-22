@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>TinyApp</title>
+</head>
+
+<body>
+  <%- include('partials/_header');%>
+  <% for (shortURL in urls) { %>
+    <div><a href="/u/<%=shortURL%>"><%= shortURL %></a> → <%= urls[shortURL] %> &nbsp
+      <form style="display: inline;" method="GET"><a href="/urls/<%=shortURL%>">Edit</a></form> &nbsp
+      <form style="display: inline;" method="POST" action="/urls/<%=shortURL%>/delete">
+        <button type="submit">
+          <span>💩</span>
+        </button>
+      </form>
+    </div>
+  <% } %>
+  <a href="/urls/new">Shorten Your URL HERE</a>
+</body>
+</html>
