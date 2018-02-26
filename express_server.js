@@ -8,7 +8,6 @@ app.use(cookieSession({
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 const bcrypt = require('bcrypt');
-// const hashedPassword = bcrypt.hashSync(password, 10);
 var morgan = require('morgan');
 app.use(morgan('tiny'));
 app.set("view engine", "ejs");
@@ -61,7 +60,6 @@ function checkDuplicateEmail(email) {
 
 // A separate function to check for email and passwords match database
 function authenticateUser(email, password) {
-  // var password = bcrypt.hashSync(password, 10)
   var isAuthenticated = false;
   var result;
   for (var key in users) {
@@ -74,10 +72,6 @@ function authenticateUser(email, password) {
   if (isAuthenticated) {
     return users[result];
   } else {
-    console.log("pw:", password)
-    console.log("userkeypw:", users[key].password)
-    console.log("email:", email)
-    console.log("userkeyemail:", users[key].email)
     return false;
   }
 }
@@ -92,12 +86,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/urls", (req, res) => {
-  //if the user is logged in 
   let templateVars;
   let userID = req.session.user_id; 
   if (userID) {
     console.log('db',urlDatabase[userID])
-    // console.log(users[userID])
       templateVars = {
       urls: urlDatabase[userID],
       user: users[userID]
@@ -108,7 +100,6 @@ app.get("/urls", (req, res) => {
       urls: urlDatabase,
       user: false
     };
-    //return res.redirect("/login")
     res.render("urls_index", templateVars);
   }
 });
@@ -117,7 +108,6 @@ app.get("/register", (req, res) => {
   return res.render("urls_register");
 });
 
-// debug below (one of the naughty-user cases)
 app.post("/register", (req, res) => {
   var result = checkDuplicateEmail(req.body.email);
   if (req.body.email === "" || req.body.password === "") {
@@ -132,7 +122,6 @@ app.post("/register", (req, res) => {
       password: bcrypt.hashSync(req.body.password, 10)
     }
     users[user.id] = user; 
-    // console.log(users);
     req.session.user_id = (user.id);
     return res.redirect("/urls");
   } 
@@ -161,14 +150,7 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  // const { user, password } = req.body;
-  // const hashedPassword = bcrypt.hashSync(password, 10);
-  // console.log("user:", user_id)
-  // console.log("pw:", password)
-  // console.log("loginpostemail:", req.body.email)
   var result = authenticateUser(req.body.email, req.body.password);
-  // console.log("hash bobypw:", req.body.password)
-  // console.log("user:", users)
   //the user credentials matches
   if (result) {
     req.session.user_id = result.id;
