@@ -2,26 +2,33 @@
 <html lang="en">
 
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>TinyApp</title>
 </head>
 
-<body>
+<body style="font-size:20px; padding:50px;">
   <p>🐣 Tiny App</p>
-  <% if(username) { %>
-    <%= username %> 
-      <form style="display: inline"; method="POST" action="/logout">
-        <button type="submit">
-          <span>Sign out</span>
-        </button>
-      </form>
+
+  <% if (user) { %>
+    <p style="margin: 0;"><%= user.email %></p> 
+    <form style="display: inline;" method="POST" action="/logout">
+      <button style="display: inline;" type="submit">
+        <span>Sign out</span>
+      </button>
+    </form>
   <% } else { %>  
-  <form method="POST" action="/login">
-    <label for="username">Username</label>
-    <input id="username" name="username" type="text">
-    <button type="submit">
-      <span>Sign in</span>
-    </button>
-  </form>
+    <form style="display: inline;" method="GET" action="/login">
+      <button type="submit">
+        <span>Sign In</span>
+      </button>
+    </form>
+    <form style="display: inline;" method="GET" action="/register">
+      <button type="submit">
+        <span>Register</span>
+      </button>
+    </form>
   <% } %>
 </body>
 

@@ -2,16 +2,18 @@
 <html lang="en">
 
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>TinyApp</title>
 </head>
 
 <body>
   <%- include('partials/_header')%>
-  <p>Short URL: <%= shortURL %></p>
-  
-  
-  <form method="POST" action="/urls/<%=shortURL%>">
-    <input type="text" id = "longURL" name="longURL" value="<%= urls[shortURL]%>">
+  <p style="margin-top: 50px;">Short URL: <%= shortURL %></p>
+
+  <form method="POST" action="/urls/<%= shortURL %>">
+    <input style="width: 500px;" type="text" id="urls" name="urls" value="<%= urls %>">
       <button type="submit">
       <span style="display: inline;">Update</span>
     </button>
