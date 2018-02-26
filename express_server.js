@@ -170,7 +170,10 @@ app.post("/logout", (req, res) => {
 app.post("/urls", (req, res) => {
   let userID = req.session.user_id;
   let newShortURL = generateRandomString();
-  urlDatabase[userID][newShortURL] = req.body.longURL;
+    if (!urlDatabase[userID]) {
+      urlDatabase[userID] = {}
+    }
+    urlDatabase[userID][newShortURL] = req.body.longURL;
   return res.redirect(`/urls/`);
 });
 

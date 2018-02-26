@@ -10,7 +10,6 @@
 
 <body>
   <%- include('partials/_header');%>
-  <% console.log('urls', urls)%>
   <% if (user) { %> 
   <% for (var key in urls) { %>
     <div><a href="/u/<%=key%>"><%= key %></a> → <%= urls[key] %> &nbsp
